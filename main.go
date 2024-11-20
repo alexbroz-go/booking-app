@@ -6,6 +6,6 @@ func main() {
 	fmt.Println("Welcome to our conference booking application")
 	fmt.Println("Get your tickets here to attend")
 
-	conferencename := "Go Conference"
-	fmt.Println(conferencename)
+	var conferenceName = "Go Conference"
+	fmt.Println(conferenceName)
 }
