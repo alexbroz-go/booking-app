@@ -45,11 +45,14 @@ func main() {
 	}
 }
 
+// Функция приветствие
 func greetUser() {
 	fmt.Printf("Welcome to %v booking application\n", conferenceName)
 	fmt.Printf("We have total %v of tickets and %v are still available.\n", conferenceTickets, remainingTickets)
 	fmt.Println("Get your tickets here to attend")
 }
+
+// Отделяем Имя от фамилии для вывода имени
 func getFirstNames() []string {
 	firstNames := []string{}
 	for _, booking := range bookings {
@@ -59,19 +62,21 @@ func getFirstNames() []string {
 	return firstNames
 }
 
+// Проверка на валидность вводимых данных
 func validateUserInput(firstName string, lastName string, email string, userTickets int) (bool, bool, bool) {
 	var isValidName = len(firstName) >= 2 && len(lastName) >= 2
 	var isValidEmail = strings.Contains(email, "@")
 	var isValidTicketsNumber = userTickets > 0 && userTickets <= remainingTickets
 	return isValidName, isValidEmail, isValidTicketsNumber
 }
+
+// Функция ввода данных от User
 func getUserInput() (string, string, string, int) {
 	var firstName string
 	var lastName string
 	var email string
 	var userTickets int
 
-	// ask user for their name
 	fmt.Println("Enter your first name")
 	fmt.Scan(&firstName)
 
@@ -86,6 +91,7 @@ func getUserInput() (string, string, string, int) {
 	return firstName, lastName, email, userTickets
 }
 
+// Добавляем Имю и Фамилия Usera, Благодарность за покупку билета + количество оставшихся билетов
 func bookTicket(userTickets int, firstName string, lastName string, conferenceName string, email string) {
 	remainingTickets = remainingTickets - userTickets
 	bookings = append(bookings, firstName+" "+lastName)
