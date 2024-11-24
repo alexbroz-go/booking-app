@@ -1,15 +1,19 @@
 package main
 
-import (
-	"fmt"
-	"strconv"
-)
+import "fmt"
 
 const conferenceTickets = 50
 
 var conferenceName = "Go Conference"
 var remainingTickets int = 50
-var bookings = make([]map[string]string, 0)
+var bookings = make([]UserData, 0)
+
+type UserData struct {
+	firstName      string
+	lastName       string
+	email          string
+	number0Tickets int
+}
 
 func main() {
 	greetUser()
@@ -79,11 +83,12 @@ func bookTicket(userTickets int, firstName string, lastName string, conferenceNa
 
 	// Добавляем карту пользователя
 
-	var userData = make(map[string]string)
-	userData["firstName"] = firstName
-	userData["lastName"] = lastName
-	userData["email"] = email
-	userData["number0Tickets"] = strconv.FormatUint(uint64(userTickets), 10)
+	var userData = UserData{
+		firstName:      firstName,
+		lastName:       lastName,
+		email:          email,
+		number0Tickets: userTickets,
+	}
 
 	bookings = append(bookings, userData)
 	fmt.Printf("List of bookings is %v\n", bookings)
@@ -96,7 +101,7 @@ func bookTicket(userTickets int, firstName string, lastName string, conferenceNa
 func getFirstNames() []string {
 	firstNames := []string{}
 	for _, booking := range bookings {
-		firstNames = append(firstNames, booking["firstName"])
+		firstNames = append(firstNames, booking.firstName)
 	}
 	return firstNames
 }
