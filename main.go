@@ -52,24 +52,6 @@ func greetUser() {
 	fmt.Println("Get your tickets here to attend")
 }
 
-// Отделяем Имя от фамилии для вывода имени
-func getFirstNames() []string {
-	firstNames := []string{}
-	for _, booking := range bookings {
-		var names = strings.Fields(booking)
-		firstNames = append(firstNames, names[0])
-	}
-	return firstNames
-}
-
-// Проверка на валидность вводимых данных
-func validateUserInput(firstName string, lastName string, email string, userTickets int) (bool, bool, bool) {
-	var isValidName = len(firstName) >= 2 && len(lastName) >= 2
-	var isValidEmail = strings.Contains(email, "@")
-	var isValidTicketsNumber = userTickets > 0 && userTickets <= remainingTickets
-	return isValidName, isValidEmail, isValidTicketsNumber
-}
-
 // Функция ввода данных от User
 func getUserInput() (string, string, string, int) {
 	var firstName string
@@ -90,6 +72,26 @@ func getUserInput() (string, string, string, int) {
 	fmt.Scan(&userTickets)
 	return firstName, lastName, email, userTickets
 }
+
+// Отделяем Имя от фамилии для вывода имени
+func getFirstNames() []string {
+	firstNames := []string{}
+	for _, booking := range bookings {
+		var names = strings.Fields(booking)
+		firstNames = append(firstNames, names[0])
+	}
+	return firstNames
+}
+
+// Проверка на валидность вводимых данных
+func validateUserInput(firstName string, lastName string, email string, userTickets int) (bool, bool, bool) {
+	var isValidName = len(firstName) >= 2 && len(lastName) >= 2
+	var isValidEmail = strings.Contains(email, "@")
+	var isValidTicketsNumber = userTickets > 0 && userTickets <= remainingTickets
+	return isValidName, isValidEmail, isValidTicketsNumber
+}
+
+// Функция ввода данных от User
 
 // Добавляем Имю и Фамилия Usera, Благодарность за покупку билета + количество оставшихся билетов
 func bookTicket(userTickets int, firstName string, lastName string, conferenceName string, email string) {
